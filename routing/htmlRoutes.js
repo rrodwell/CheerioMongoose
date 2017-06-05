@@ -29,10 +29,13 @@ module.exports = function(app) {
                 // Save an empty result object
                 var result = {};
 
-                // Add the text and href of every link, and save them as properties of the result object
-                result.title = $(this).children("h2").text();
-                result.link = $(this).children("a").attr("href");
-                result.summary = $(this).children("p.summary").text;
+                //Jumping into div with class story-meta inside a tag,
+                //grabbing the h2 child of that div
+                result.title = $("div.story-meta", this).children("h2").text().trim();
+                //Grabbing the attr hrf from the a tag
+                result.link = $(this).attr("href");
+                //Jumping into grandchild p tag with class summary
+                result.summary = $("p.summary", this).text();
 
                 // Using our Article model, create a new entry
                 // This effectively passes the result object to the entry (and the title and link)
@@ -59,8 +62,6 @@ module.exports = function(app) {
     // This will get the articles we scraped from the mongoDB
     app.get("/articles", function (req, res) {
 
-
-        // TODO: Finish the route so it grabs all of the articles
         Article.find({}, function (err, doc) {
             if (err) {
                 res.send(err);
@@ -70,82 +71,63 @@ module.exports = function(app) {
         });
 
     });
-    //
-    // app.get("/notes", function(req, res) {
-    //
-    //
-    //     // TODO: Finish the route so it grabs all of the articles
-    //     Note.find({}, function(err, doc){
-    //         if(err){
-    //             res.send(err);
-    //         } else {
-    //             res.send(doc);
-    //         }
-    //     });
-    //
-    // });
-    // // This will grab an article by it's ObjectId
-    // app.get("/articles/:id", function(req, res) {
-    //
-    //
-    //     // TODO
-    //     // ====
-    //
-    //     // Finish the route so it finds one article using the req.params.id,
-    //
-    //     // and run the populate method with "note",
-    //
-    //     // then responds with the article with the note included
-    //     Article.findOne({_id: req.params.id})
-    //         .populate("note")
-    //         .exec(function(err, doc){
-    //             if(err){
-    //                 res.send(err);
-    //             } else {
-    //                 console.log("findOne: "+doc);
-    //                 res.send(doc);
-    //             }
-    //         });
-    //
-    // });
-    //
-    // // Create a new note or replace an existing note
-    // app.post("/articles/:id", function(req, res) {
-    //
-    //
-    //     // TODO
-    //     // ====
-    //
-    //     // save the new note that gets posted to the Notes collection
-    //
-    //     // then find an article from the req.params.id
-    //
-    //     // and update it's "note" property with the _id of the new note
-    //     // Use our Note model to make a new note from the req.body
-    //     var newNote = new Note(req.body);
-    //     // Save the new note to mongoose
-    //     newNote.save(function(error, doc) {
-    //         // Send any errors to the browser
-    //         if (error) {
-    //             res.send(error);
-    //         }
-    //         // Otherwise
-    //         else {
-    //             console.log("doc: " +doc);
-    //             // Find our user and push the new note id into the User's notes array
-    //             Article.findOneAndUpdate({_id: req.params.id}, { $push: { "note": doc._id } }, { new: true }, function(err, newdoc) {
-    //                 // Send any errors to the browser
-    //                 if (err) {
-    //                     res.send(err);
-    //                 }
-    //                 // Or send the newdoc to the browser
-    //                 else {
-    //                     console.log("newDoc: "+newdoc);
-    //                     res.send(newdoc);
-    //                 }
-    //             });
-    //         }
-    //     });
-    // });
-    //
+
+    // This will get all of the notes added to mongoDB
+    app.get("/notes", function(req, res) {
+
+        Note.find({}, function(err, doc){
+            if(err){
+                res.send(err);
+            } else {
+                res.send(doc);
+            }
+        });
+
+    });
+
+    // This will grab an article by it's ObjectId
+    app.get("/articles/:id", function(req, res) {
+
+        Article.findOne({_id: req.params.id})
+            .populate("note")
+            .exec(function(err, doc){
+                if(err){
+                    res.send(err);
+                } else {
+                    console.log("findOne: "+doc);
+                    res.send(doc);
+                }
+            });
+
+    });
+
+    // Create a new note or replace an existing note
+    app.post("/articles/:id", function(req, res) {
+
+        var newNote = new Note(req.body);
+        // Save the new note to mongoose
+        newNote.save(function(error, doc) {
+            // Send any errors to the browser
+            if (error) {
+                res.send(error);
+            }
+            // Otherwise
+            else {
+                console.log("doc: " +doc);
+                // Find our user and push the new note id into the User's notes array
+                Article.findOneAndUpdate({_id: req.params.id}, { $push: { "note": doc._id } }, { new: true }, function(err, newdoc) {
+                    // Send any errors to the browser
+                    if (err) {
+                        res.send(err);
+                    }
+                    // Or send the newdoc to the browser
+                    else {
+                        console.log("newDoc: "+newdoc);
+                        res.send(newdoc);
+                    }
+                });
+            }
+        });
+    });
+
 };//module.exports
