@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 // Database configuration with mongoose
-mongoose.connect("mongodb://localhost/cheeriomongoose");
+mongoose.connect("mongodb://localhost/cheerioMongoose");
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -44,7 +44,7 @@ db.once("open", function() {
 // app.set("view engine", "handlebars");
 
 //Routes
-require("./routing/htmlRoutes")(app);
+require("./routing/routes")(app);
 
 // Listen on port 3000
 app.listen(3000, function() {

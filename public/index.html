@@ -2,16 +2,48 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Scraping With Mongoose</title>
+    <title>News Scraper</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Roboto:500" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
   </head>
   <body>
-    <div id="wrapper">
-      <h1>Note Scraper</h1>
-      <h2><i>If you can do this...the homework should be no problem.</i></h2>
-      <div id="articles"></div>
-      <div id="notes"></div>
-    </div>
+
+      <nav class="navbar navbar-default">
+          <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <!-- Collect the nav links, forms, and other content for toggling -->
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                      <a class="navbar-brand" href="#">TECH NEWS</a>
+                      <ul class="nav navbar-nav">
+                          <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+                          <li><a href="#">Saved Articles</a></li>
+                          <a class="btn btn-danger btn-md" href="#" role="button">SCRAPE NEW ARTICLES!</a>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </nav>
+
+      <div class="jumbotron text-center">
+          <div class="jumbo-text">
+              <h1>MONGO SCRAPER</h1>
+              <h3>New York Time Technology Edition</h3>
+        </div>
+      </div>
+
+        <div id="wrapper">
+          <h1>Note Scraper</h1>
+          <h2><i>If you can do this...the homework should be no problem.</i></h2>
+          <div id="articles"></div>
+          <div id="notes"></div>
+        </div>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="assets/js/app.js"></script>
   </body>

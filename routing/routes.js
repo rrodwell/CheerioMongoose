@@ -31,7 +31,7 @@ module.exports = function(app) {
 
                 //Jumping into div with class story-meta inside a tag,
                 //grabbing the h2 child of that div
-                result.title = $("div.story-meta", this).children("h2").text().trim();
+                result.title = $("div.story-meta", this).children("h2").text();
                 //Grabbing the attr hrf from the a tag
                 result.link = $(this).attr("href");
                 //Jumping into grandchild p tag with class summary

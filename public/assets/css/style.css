@@ -1,4 +1,31 @@
-body { background-color: #F2F6D0 }
+body { background-color: whitesmoke }
+
+.navbar{
+    margin-bottom: 0;
+}
+.navbar-brand{
+    font-size: 24px;
+    font-family: 'Abril Fatface', cursive;
+}
+
+.btn-danger{
+    margin-top: 3px;
+    padding: 10px;
+}
+
+.jumbotron{
+    background: url(../img/circuit.jpg);
+    background-repeat: no-repeat;
+    opacity: 0.6;
+    height: 300px;
+    font-family: 'Roboto', sans-serif;
+    color: whitesmoke;
+}
+
+.jumbotron h1{
+    font-size: 78px;
+}
+
 #wrapper {
     width: 960px;
     margin-left: auto;
