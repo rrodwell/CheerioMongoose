@@ -13,6 +13,7 @@ body { background-color: whitesmoke }
     padding: 10px;
 }
 
+
 .jumbotron{
     background: url(../img/circuit.jpg);
     background-repeat: no-repeat;
@@ -30,18 +31,27 @@ body { background-color: whitesmoke }
     width: 960px;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 5%;
+    padding-top: 20px;
 }
 #articles {
     display: inline-block;
     overflow: auto;
-    width: 60%;
-    height: 700px;
 }
-#notes {
+
+.panel{
+    margin-top: 10px;
+}
+.btn-sm{
     float: right;
-    width: 30%;
 }
+
+.panel-title{
+    font-size: 24px;
+}
+/*#notes {*/
+    /*float: right;*/
+    /*width: 30%;*/
+/*}*/
 textarea, input {
     display: block;
     width: 100%;

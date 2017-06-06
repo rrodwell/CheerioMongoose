@@ -3,7 +3,29 @@ $.getJSON("/articles", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+      //Panel Div
+      var articleDiv = $("<div class='panel panel-info'>");
+      articleDiv.attr("id", data[i]._id);
+
+      //Panel Heading Div
+      var panelHeading = $("<div class='panel-heading'>");
+      var header = $("<h2 class='panel-title'>");
+      var saveBtn = $("<a class='btn btn-danger btn-sm' href='#' role='button'>SAVE ARTICLE</a>");
+      header.append(data[i].title);
+      panelHeading.append(header, saveBtn);
+
+      //Panel Body Div
+      var panelBody = $("<div class='panel-body'>");
+      var summaryTag = $("<p>");
+      summaryTag.append(data[i].summary);
+      var link = $("<p>");
+      link.append(data[i].link);
+      panelBody.append(summaryTag,link);
+
+      //Append to Panel Div
+      articleDiv.append(panelHeading, panelBody);
+
+    $("#articles").append(articleDiv);
   }
 });
 

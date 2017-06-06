@@ -40,7 +40,6 @@ module.exports = function(app) {
                 // Using our Article model, create a new entry
                 // This effectively passes the result object to the entry (and the title and link)
                 var entry = new Article(result);
-
                 // Now, save that entry to the db
                 entry.save(function (err, doc) {
                     // Log any errors
