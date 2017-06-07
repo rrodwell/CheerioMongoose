@@ -3,29 +3,24 @@ $.getJSON("/articles", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
-      //Panel Div
-      var articleDiv = $("<div class='panel panel-info'>");
-      articleDiv.attr("id", data[i]._id);
+      var articleHeader = $("<div class='article-header'>");
 
-      //Panel Heading Div
-      var panelHeading = $("<div class='panel-heading'>");
-      var header = $("<h2 class='panel-title'>");
-      var saveBtn = $("<a class='btn btn-danger btn-sm' href='#' role='button'>SAVE ARTICLE</a>");
+      var header = $("<h2>");
       header.append(data[i].title);
-      panelHeading.append(header, saveBtn);
 
       //Panel Body Div
-      var panelBody = $("<div class='panel-body'>");
-      var summaryTag = $("<p>");
+      var articleInfo = $("<div class='article-info'>");
+      var summaryTag = $("<h4>");
       summaryTag.append(data[i].summary);
       var link = $("<p>");
       link.append(data[i].link);
-      panelBody.append(summaryTag,link);
+      var saveBtn = $("<a class='btn btn-danger btn-sm' href='#' role='button' data-id='"+data[i]._id+"'>SAVE ARTICLE</a>");
+      articleInfo.append(summaryTag,link,saveBtn);
 
       //Append to Panel Div
-      articleDiv.append(panelHeading, panelBody);
+      articleHeader.append(header, articleInfo);
 
-    $("#articles").append(articleDiv);
+    $("#articles").append(articleHeader);
   }
 });
 

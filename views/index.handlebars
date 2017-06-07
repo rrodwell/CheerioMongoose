@@ -25,3 +25,20 @@
         <h3>New York Time Technology Edition</h3>
     </div>
 </div>
+<div id="wrapper">
+    <h1 class="text-center">Articles</h1>
+    <hr class="small">
+    <div class="pre-scrollable">
+        <div id="articles">
+        {{#each articles}}
+            <div class="article-header">
+                <h2>{{this.title}}</h2>
+                <a class="btn btn-danger btn-sm" href="#" role="button" data-id="{{this._id}}">SAVE ARTICLE</a>
+                <div class="article-info">
+                    <p class="article-summary">{{this.summary}}</p>
+                    <p class="article-link">{{this.link}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

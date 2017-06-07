@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Make public a static dir
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 
 // Database configuration with mongoose
 // mongoose.connect("mongodb://localhost/cheerioMongoose");
@@ -51,5 +51,5 @@ require("./routing/routes")(app);
 
 // Listen on port PORT
 app.listen(PORT, function() {
-    console.log("App running on port 3000!");
+    console.log("App running on port " + PORT +"!");
 });

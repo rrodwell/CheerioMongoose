@@ -9,13 +9,14 @@ var cheerio = require("cheerio");
 var Note = require("../models/Note.js");
 var Article = require("../models/Article.js");
 
-
+var path = require("path");
 
 // Routes
 // ======
+
 module.exports = function(app) {
 
-    var scrapeSite =  "https://www.nytimes.com/section/technology?WT.nav=page&action=click&contentCollection=Tech&module=HPMiniNav&pgtype=Homepage&region=TopBar";
+    var scrapeSite = "https://www.nytimes.com/section/technology?WT.nav=page&action=click&contentCollection=Tech&module=HPMiniNav&pgtype=Homepage&region=TopBar";
 
     // A GET request to scrape the echojs website
     app.get("/scrape", function (req, res) {
@@ -55,7 +56,7 @@ module.exports = function(app) {
             });
         });
         // Tell the browser that we finished scraping the text
-        res.send("Scrape Complete");
+        res.sendFile(path.join(__dirname, "/../public/index.html"));
     });
 
     // This will get the articles we scraped from the mongoDB
@@ -72,10 +73,10 @@ module.exports = function(app) {
     });
 
     // This will get all of the notes added to mongoDB
-    app.get("/notes", function(req, res) {
+    app.get("/notes", function (req, res) {
 
-        Note.find({}, function(err, doc){
-            if(err){
+        Note.find({}, function (err, doc) {
+            if (err) {
                 res.send(err);
             } else {
                 res.send(doc);
@@ -85,15 +86,15 @@ module.exports = function(app) {
     });
 
     // This will grab an article by it's ObjectId
-    app.get("/articles/:id", function(req, res) {
+    app.get("/articles/:id", function (req, res) {
 
         Article.findOne({_id: req.params.id})
             .populate("note")
-            .exec(function(err, doc){
-                if(err){
+            .exec(function (err, doc) {
+                if (err) {
                     res.send(err);
                 } else {
-                    console.log("findOne: "+doc);
+                    console.log("findOne: " + doc);
                     res.send(doc);
                 }
             });
@@ -101,27 +102,27 @@ module.exports = function(app) {
     });
 
     // Create a new note or replace an existing note
-    app.post("/articles/:id", function(req, res) {
+    app.post("/articles/:id", function (req, res) {
 
         var newNote = new Note(req.body);
         // Save the new note to mongoose
-        newNote.save(function(error, doc) {
+        newNote.save(function (error, doc) {
             // Send any errors to the browser
             if (error) {
                 res.send(error);
             }
             // Otherwise
             else {
-                console.log("doc: " +doc);
+                console.log("doc: " + doc);
                 // Find our user and push the new note id into the User's notes array
-                Article.findOneAndUpdate({_id: req.params.id}, { $push: { "note": doc._id } }, { new: true }, function(err, newdoc) {
+                Article.findOneAndUpdate({_id: req.params.id}, {$push: {"note": doc._id}}, {new: true}, function (err, newdoc) {
                     // Send any errors to the browser
                     if (err) {
                         res.send(err);
                     }
                     // Or send the newdoc to the browser
                     else {
-                        console.log("newDoc: "+newdoc);
+                        console.log("newDoc: " + newdoc);
                         res.send(newdoc);
                     }
                 });

@@ -8,7 +8,7 @@ body { background-color: whitesmoke }
     font-family: 'Abril Fatface', cursive;
 }
 
-.btn-danger{
+.btn-success{
     margin-top: 3px;
     padding: 10px;
 }
@@ -16,7 +16,6 @@ body { background-color: whitesmoke }
 
 .jumbotron{
     background: url(../img/circuit.jpg);
-    background-repeat: no-repeat;
     opacity: 0.6;
     height: 300px;
     font-family: 'Roboto', sans-serif;
@@ -33,25 +32,43 @@ body { background-color: whitesmoke }
     margin-right: auto;
     padding-top: 20px;
 }
+
+.article{
+    font-family: 'Abril Fatface', cursive;
+    color: #3f3f3f;
+}
+
 #articles {
     display: inline-block;
     overflow: auto;
+    width: 100%;
 }
 
-.panel{
-    margin-top: 10px;
-}
 .btn-sm{
     float: right;
+    margin-right: 10px;
 }
 
-.panel-title{
-    font-size: 24px;
+.article-header{
+    margin-bottom: 30px;
+    border: 1px solid #06b0e6;
 }
-/*#notes {*/
-    /*float: right;*/
-    /*width: 30%;*/
-/*}*/
+
+.article-header h2{
+    font-size: 28px;
+    background-color: rgba(6,176,230,0.6);
+    color: whitesmoke;
+    padding: 20px;
+    margin-top: 0;
+}
+
+
+.article-info{
+    padding-left: 20px;
+    padding-bottom: 35px;
+}
+
+
 textarea, input {
     display: block;
     width: 100%;
