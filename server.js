@@ -27,7 +27,7 @@ app.use(express.static("public"));
 
 // Database configuration with mongoose
 // mongoose.connect("mongodb://localhost/cheerioMongoose");
-mongoose.connect("mongodb://admin:codingrocks@ds023674.mlab.com:23674/heroku_5ql1blnl");
+mongoose.connect("mongodb://heroku_kmsvwgrs:a94e5gpjg3o924c4ibe8ke511t@ds111622.mlab.com:11622/heroku_kmsvwgrs");
 var db = mongoose.connection;
 
 // Show any mongoose errors
