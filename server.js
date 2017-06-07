@@ -7,6 +7,8 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
+var PORT = process.env.PORT||8080;
+
 // Set mongoose to leverage built in JavaScript ES6 Promises
 mongoose.Promise = Promise;
 
@@ -47,7 +49,7 @@ db.once("open", function() {
 //Routes
 require("./routing/routes")(app);
 
-// Listen on port 3000
-app.listen(3000, function() {
+// Listen on port PORT
+app.listen(PORT, function() {
     console.log("App running on port 3000!");
 });
